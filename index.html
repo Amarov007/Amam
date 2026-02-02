@@ -46,11 +46,6 @@
             box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
         }
 
-        .btn-primary {
-            background: #2563eb;
-            transition: all 0.3s ease;
-        }
-
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
@@ -70,70 +65,231 @@
         .nav-link:hover::after {
             width: 100%;
         }
+
+        .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #7c3aed 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
+        }
+
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animation.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .crypto-icon {
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .footer-gradient {
+            background: linear-gradient(180deg, #0a0e27 0%, #1e3c72 100%);
+        }
+        
+        /* تجميل ويدجت TradingView */
+        .tv-wrapper {
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
     </style>
 </head>
 <body>
 
-    <div class="tradingview-widget-container" style="background: rgba(0,0,0,0.2);">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-        {
-          "symbols": [
-            { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500 Index" },
-            { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-            { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
-            { "proName": "FX_IDC:EURUSD", "title": "EUR to USD" }
-          ],
-          "colorTheme": "dark",
-          "isTransparent": true,
-          "showSymbolLogo": true,
-          "locale": "en"
-        }
-        </script>
+    <nav class="fixed w-full top-0 z-50 bg-opacity-90 backdrop-blur-lg" style="background: rgba(10, 14, 39, 0.95);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <div class="text-3xl font-bold">
+                        <span class="gradient-text">BingX</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 space-x-reverse">
+                    <a href="#home" class="nav-link hover:text-blue-400">الرئيسية</a>
+                    <a href="#about" class="nav-link hover:text-blue-400">حول BingX</a>
+                    <a href="#web3" class="nav-link hover:text-blue-400">Web3</a>
+                    <a href="#blockchain" class="nav-link hover:text-blue-400">البلوكتشين</a>
+                    <a href="#partnerships" class="nav-link hover:text-blue-400">الشراكات</a>
+                </div>
+                <a href="https://bingxdao.com/invite/QMWBFQ/" target="_blank" class="btn-primary px-6 py-2 rounded-full text-white font-semibold">
+                    ابدأ التداول
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tv-wrapper pt-20">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+            {
+            "symbols": [
+              {"proName": "FOREXCOM:SPXUSD", "title": "S&P 500 Index"},
+              {"proName": "FOREXCOM:NSXUSD", "title": "US 100 Cash CFD"},
+              {"proName": "FX_IDC:EURUSD", "title": "EUR to USD"},
+              {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
+              {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"}
+            ],
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "showSymbolLogo": true,
+            "locale": "en"
+            }
+            </script>
+        </div>
     </div>
-    <div class="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20">
-        
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
-            مرحباً بك في <span class="gradient-text">BingX</span>
-        </h1>
 
-        <p class="text-xl md:text-2xl mb-8 text-gray-300">
-            منصة التداول العالمية الرائدة للعملات الرقمية
-        </p>
-
-        <div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-16">
-            <a href="https://bingxdao.com/invite/QMWBFQ/" class="no-underline">
-                <button class="btn-primary px-10 py-4 rounded-full text-xl font-bold flex items-center hover:scale-105 transition-transform">
+    <section id="home" class="hero-section min-h-screen flex items-center justify-center relative">
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="floating mb-8">
+                <div class="inline-block p-8 rounded-full" style="background: rgba(59, 130, 246, 0.1);">
+                    <i class="fas fa-chart-line text-7xl text-blue-400"></i>
+                </div>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6">
+                مرحباً بك في <span class="gradient-text">BingX</span>
+            </h1>
+            <p class="text-2xl md:text-3xl mb-12 text-gray-300">منصة التداول العالمية الرائدة للعملات الرقمية</p>
+            
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-20">
+                <a href="https://bingxdao.com/invite/QMWBFQ/" target="_blank" class="btn-primary px-10 py-4 rounded-full text-xl font-bold text-white">
                     <i class="fas fa-rocket ml-2"></i>
                     ابدأ الآن
+                </a>
+                <button class="px-10 py-4 rounded-full text-xl font-bold text-white border-2 border-blue-400 hover:bg-blue-400 hover:bg-opacity-20 transition">
+                    <i class="fas fa-play-circle ml-2"></i>
+                    شاهد الفيديو
                 </button>
-            </a>
+            </div>
 
-            <button class="px-10 py-4 rounded-full text-xl font-bold border border-white/20 hover:bg-white/10 flex items-center">
-                <i class="fas fa-play-circle ml-2"></i>
-                شاهد الفيديو
-            </button>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-10 w-full max-w-6xl">
-            <div class="card p-6 rounded-2xl">
-                <div class="text-3xl font-bold gradient-text">10M+</div>
-                <p class="text-gray-400 mt-2">مستخدم نشط</p>
-            </div>
-            <div class="card p-6 rounded-2xl">
-                <div class="text-3xl font-bold gradient-text">$100B+</div>
-                <p class="text-gray-400 mt-2">حجم التداول</p>
-            </div>
-            <div class="card p-6 rounded-2xl">
-                <div class="text-3xl font-bold gradient-text">350+</div>
-                <p class="text-gray-400 mt-2">عملة رقمية</p>
-            </div>
-            <div class="card p-6 rounded-2xl">
-                <div class="text-3xl font-bold gradient-text">24/7</div>
-                <p class="text-gray-400 mt-2">دعم فني</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="card p-6 rounded-2xl">
+                    <div class="stats-number gradient-text">10M+</div>
+                    <p class="text-gray-400 mt-2">مستخدم نشط</p>
+                </div>
+                <div class="card p-6 rounded-2xl">
+                    <div class="stats-number gradient-text">$100B+</div>
+                    <p class="text-gray-400 mt-2">حجم التداول</p>
+                </div>
+                <div class="card p-6 rounded-2xl">
+                    <div class="stats-number gradient-text">350+</div>
+                    <p class="text-gray-400 mt-2">عملة رقمية</p>
+                </div>
+                <div class="card p-6 rounded-2xl">
+                    <div class="stats-number gradient-text">24/7</div>
+                    <p class="text-gray-400 mt-2">دعم فني</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
+    <section id="about" class="py-24 bg-gradient-to-b from-[#0a0e27] to-[#1e3c72]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 scroll-animation">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">حول <span class="gradient-text">BingX</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">منصة تداول عالمية موثوقة تخدم ملايين المستخدمين في أكثر من 100 دولة</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="scroll-animation">
+                    <h3 class="text-4xl font-bold mb-6">لماذا تختارنا؟</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-shield-alt text-blue-400 text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">أمان مطلق</h4>
+                                <p class="text-gray-400">حماية كاملة لأصولك عبر تقنيات التشفير البارد.</p>
+                            </div>
+                        </div>
+                        <a href="https://bingxdao.com/invite/QMWBFQ/" target="_blank" class="inline-block mt-4 text-blue-400 font-bold border-b border-blue-400 pb-1 hover:text-white hover:border-white transition">
+                            سجل الآن وابدأ التداول الآمن &larr;
+                        </a>
+                    </div>
+                </div>
+                <div class="scroll-animation">
+                    <div class="card p-8 rounded-3xl">
+                         <h3 class="text-3xl font-bold mb-4">انضم إلى النخبة</h3>
+                         <p class="text-gray-300 mb-6">احصل على وصول فوري إلى أسواق الكريبتو العالمية بضغطة زر.</p>
+                         <a href="https://bingxdao.com/invite/QMWBFQ/" target="_blank" class="btn-primary w-full text-center py-4 rounded-xl font-bold">ابدأ الآن</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0a0e27]">
+        <div class="container mx-auto px-6">
+            <div class="card p-16 rounded-3xl text-center scroll-animation gradient-bg">
+                <h2 class="text-5xl font-bold mb-6">ابدأ رحلتك في عالم الكريبتو اليوم</h2>
+                <p class="text-xl mb-10 text-gray-200 max-w-2xl mx-auto">
+                    انضم إلى ملايين المتداولين حول العالم واحصل على مكافآت ترحيبية تصل إلى $5000
+                </p>
+                <div class="flex flex-col md:flex-row gap-6 justify-center">
+                    <a href="https://bingxdao.com/invite/QMWBFQ/" target="_blank" class="bg-white text-blue-600 px-10 py-4 rounded-full text-xl font-bold hover:scale-105 transition">
+                        <i class="fas fa-user-plus ml-2"></i>
+                        سجل الآن
+                    </a>
+                    <a href="https://bingxdao.com/invite/QMWBFQ/" target="_blank" class="border-2 border-white text-white px-10 py-4 rounded-full text-xl font-bold hover:bg-white hover:text-blue-600 transition">
+                        <i class="fas fa-download ml-2"></i>
+                        حمل التطبيق وابدأ الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-gradient py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold mb-4 gradient-text">BingX</h3>
+            <p class="text-gray-400 mb-8">خيارك الأول لتداول العملات الرقمية بذكاء وأمان.</p>
+            <div class="border-t border-gray-800 pt-8 text-gray-500">
+                <p>© 2026 BingX. جميع الحقوق محفوظة | تم التطوير بواسطة <span class="text-blue-400 font-bold">amar-bingx</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll & Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-animation').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
