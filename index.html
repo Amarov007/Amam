@@ -1,113 +1,129 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BingX - منصة التداول العالمية للعملات الرقمية</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
+"use client"
 
-        body {
-            background: #0a0e27;
-            color: #fff;
-            overflow-x: hidden;
-        }
+import { motion } from "framer-motion"
+import { MapPin, Building2, Users } from "lucide-react"
 
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
-        }
+const offices = [
+  { city: "سنغافورة", role: "المقر الرئيسي" },
+  { city: "هونغ كونغ", role: "مكتب إقليمي" },
+  { city: "دبي", role: "الشرق الأوسط" },
+  { city: "لندن", role: "أوروبا" },
+]
 
-        .gradient-text {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+const regions = [
+  { name: "آسيا والمحيط الهادئ", users: "5M+", countries: "30+" },
+  { name: "أوروبا والشرق الأوسط", users: "2.5M+", countries: "50+" },
+  { name: "الأمريكتان", users: "1.5M+", countries: "30+" },
+  { name: "أفريقيا", users: "1M+", countries: "40+" },
+]
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-        }
+export function GlobalPresence() {
+  return (
+    <section className="py-24 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            تواجدنا{" "}
+            <span className="bg-gradient-to-l from-[#2B6DEE] to-[#60A5FA] bg-clip-text text-transparent">
+              العالمي
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            نخدم مستخدمينا في أكثر من 150 دولة من مكاتبنا حول العالم
+          </p>
+        </motion.div>
 
-        .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
-        }
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Offices */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-primary" />
+              مكاتبنا
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {offices.map((office) => (
+                <div
+                  key={office.city}
+                  className="p-4 rounded-xl bg-card border border-border"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <span className="font-medium text-foreground">{office.city}</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground">{office.role}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
+          {/* Regions */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+              <Users className="w-5 h-5 text-primary" />
+              مستخدمونا حول العالم
+            </h3>
+            <div className="space-y-4">
+              {regions.map((region) => (
+                <div
+                  key={region.name}
+                  className="p-4 rounded-xl bg-card border border-border flex items-center justify-between"
+                >
+                  <div>
+                    <span className="font-medium text-foreground block">
+                      {region.name}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {region.countries} دولة
+                    </span>
+                  </div>
+                  <div className="text-left">
+                    <span className="text-xl font-bold bg-gradient-to-l from-[#2B6DEE] to-[#60A5FA] bg-clip-text text-transparent">
+                      {region.users}
+                    </span>
+                    <span className="text-sm text-muted-foreground block">مستخدم</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #3b82f6;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #7c3aed 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
-        }
-
-        .stats-number {
-            font-size: 3rem;
-            font-weight: 800;
-        }
-
-        .scroll-animation {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .scroll-animation.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        {/* Developer Credit */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-20 text-center"
+        >
+          <div className="p-8 rounded-2xl bg-gradient-to-r from-[#2B6DEE]/10 to-[#1E3A8A]/10 border border-primary/20">
+            <p className="text-muted-foreground mb-2">هذا الموقع طُور بواسطة</p>
+            <h3 className="text-2xl font-bold bg-gradient-to-l from-[#2B6DEE] to-[#60A5FA] bg-clip-text text-transparent">
+              amar-bingx
+            </h3>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
         .crypto-icon {
             animation: rotate 20s linear infinite;
         }
